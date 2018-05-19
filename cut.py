@@ -1,6 +1,7 @@
 import chess
 import numpy as np
 import sys
+import random
 
 f = open("out.txt", "w")
 
@@ -30,10 +31,17 @@ def calculateBestMove(board, alpha , beta , depth):
     newGameMoves = board.legal_moves
     newGameMoves = list(newGameMoves)
 
-    np.random.shuffle(newGameMoves)
+    random.shuffle(newGameMoves)
     [eprint(x) for x in newGameMoves]
     bestMove =None
     nextStep = None
+    if len(newGameMoves) :
+        nextStep = newGameMove[0]
+    elif board.turn :
+        return -99999,None
+    else:
+        return 99999,None
+    
     if(board.turn): #white
         bestMove=-99999
         for move in newGameMoves:
